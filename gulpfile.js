@@ -4,11 +4,6 @@ var gulp = require('gulp');
 var nunjucksRender = require('gulp-nunjucks-render');
 var browserSync = require('browser-sync').create();
 
-var nunjucks = require('nunjucks');
-nunjucks.configure('./_resource/_layouts', {
-  noCache: true
-});
-
 gulp.task('nunjucks', (done) => {
   gulp.src([
     '_resource/_layout/**/*.html',
