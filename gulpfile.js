@@ -6,18 +6,21 @@ var browserSync = require('browser-sync').create();
 
 gulp.task('nunjucks', (done) => {
   gulp.src([
-    '_resource/_layout/**/*.html',
+    '_resource/**/*.html',
+    '_resource/_layout/**/',
+    '!_resource/_layout/_*/**',
     '!_resource/_layout/**/_*.html'
   ])
-  .pipe(nunjucksRender({path: '_resource/_layout/'}))
+  .pipe(nunjucksRender({path: '_resource/_layout'}))
   .pipe(gulp.dest('./html'))
   done();
 });
 
 gulp.task('browser-sync', (done) => {
   browserSync.init({
+    files: 'html/**/*.html',
     server: {
-      baseDir: './html/',
+      baseDir: 'html',
       index: 'index.html',
     },
   });
@@ -29,7 +32,7 @@ gulp.task('browser-reload', (done) => {
 });
 
 gulp.task('watch-files', (done) => {
-  gulp.watch('_resource/_layout/**/*.html', gulp.task('nunjucks'));
+  gulp.watch('_resource/**/*.html', gulp.task('nunjucks'));
   gulp.watch('./html/', gulp.task('browser-reload'));
   done();
 });
