@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="ja" dir="ltr">
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta charset="utf-8">
-<title>{{ pageTitle }}</title>
-</head>
-<body>
+<html>
+{% include '_partial/_head.html' %}
 
-<main>
-{% block content_main %}
-{% endblock %}
-</main>
+<body class="{{ parent }}">
+{% if parent !== 'home' %}{% include '_partial/_header.html' %}{% endif %}
+{% include '_partial/_page-title.html' %}
+{% include '_partial/_breadcrumb.html' %}
 
+{% block contents %}{% endblock %}
+
+{% if parent !== 'service' and parent !== 'home' %}
+    {% include '_partial/_footer-link.html' %}
+{% endif %}
+{% include '_partial/_contact.html' %}
+{% include '_partial/_footer.html' %}
+    </div><!-- /.wrap -->
 </body>
 </html>
